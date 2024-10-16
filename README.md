@@ -2,15 +2,16 @@
 ## From rep
 1. Clone rep to domains
 ```sh
-git clone https://github.com/savayaqu/laravel-api.loc
+git clone https://github.com/savayaqu/laravel-api.loc.git
 ```
 2. i composer to project
 ```sh
+cd laravel-api.loc
 composer i
 ```
 3. copy .env.example to .env
 ```sh
-cp .env.exaple .env
+copy .env.example .env
 ```
 4. Generate app-key 
 ```sh
@@ -29,7 +30,7 @@ SESSION_DRIVER=file
 ```
 ## Empty project created
 ```sh
-cd domain
+cd domains
 mkdir laravel-api.loc
 cd laravel-api.loc
 composer self-update
