@@ -11,7 +11,7 @@ composer i
 ```
 3. copy .env.example to .env
 ```sh
-copy .env.exaple .env
+copy .env.example .env
 ```
 4. Generate app-key 
 ```sh
