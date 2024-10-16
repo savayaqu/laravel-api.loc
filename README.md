@@ -6,11 +6,12 @@ git clone https://github.com/savayaqu/laravel-api.loc.git
 ```
 2. i composer to project
 ```sh
+cd laravel-api.loc
 composer i
 ```
 3. copy .env.example to .env
 ```sh
-cp .env.exaple .env
+copy .env.exaple .env
 ```
 4. Generate app-key 
 ```sh
