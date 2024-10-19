@@ -13,7 +13,8 @@ return Application::configure(basePath: dirname(__DIR__))
         apiPrefix: 'api',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+       // throw new \App\Exceptions\ApiException(401, 'Unauthorized');
+        $middleware->redirectTo(fn() => throw new \App\Exceptions\ApiException(401, 'Вы не авторизированы'));
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Auth\AuthenticationException;
 
 class ApiException extends HttpResponseException
 {
@@ -18,4 +19,5 @@ class ApiException extends HttpResponseException
 
         parent::__construct(response()->json($response)->setStatusCode($code));
     }
+
 }

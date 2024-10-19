@@ -10,6 +10,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
@@ -25,10 +26,11 @@ class AuthController extends Controller
             ...$request->validated(),
             'role_id' => $roleId
         ]);
-        $token = $user->createToken('remember_token')->plainTextToken;
+        $user->api_token = Hash::make(Str::random(60));
+        $user->save();
         return response([
-            'token' => $token,
-            'data' => UserResource::make($user),
+            'user' => UserResource::make($user),
+            'token' => $user->api_token,
         ], 201);
     }
 
@@ -39,14 +41,17 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         if (!Auth::attempt($request->only('login', 'password')))
-            throw new ApiException(401, 'Invalid credentials');
+            throw new ApiException(401, 'Неверный логин и/или пароль');
 
+        //пОЛУЧЕНИЕ ТЕкущего токена
         $user = Auth::user();
-        $token = $user->createToken('remember_token')->plainTextToken;
+        //Сохранение нового токена
+        $user->api_token = Hash::make(Str::random(60));
+        $user->save();
         return response([
-            'token' => $token,
+            'token' => $user->api_token,
             'data' => UserResource::make($user),
-        ], 201);
+        ], 200);
     }
 
 
@@ -55,7 +60,9 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
-        return response(null, 204);
+        $user = Auth::user();
+        $user->api_token = null;
+        $user->save();
+        return response()->json(['message' => 'Вы вышли из системы'], 200);
     }
 }

@@ -30,7 +30,7 @@ class User extends Authenticatable
     ];
     protected function casts(): array
     {
-        return ['password' => 'hashed', 'birthday' => 'hashed'];
+        return ['password' => 'hashed'];
     }
 
     public function role() {
