@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Exceptions\ApiException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
-use App\Http\Resources\UserResource;
+use App\Http\Resources\Api\UserResource;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
